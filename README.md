@@ -3,4 +3,5 @@
  for example:  
  - number of students,  
  - daily or yearly billing,  
- - class days, etc.
+ - class days,
+ - etc.
