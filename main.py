@@ -1,25 +1,29 @@
 import os
-import datetime
 
 alunos = []
 professores = []
-aulas = ['Guitarra', 'Violão', 'Bateria', 'Teclado']
+aulas = []
+
+def main():
+    os.system('cls')
+    print('Boas vindas ao sistema de gestão da Escola de Música Sustenido\n\n')
+    menu()
+
 def menu():
     
     print('''Escolha uma opção:
 1 - Listar ou adicionar alunos
 2 - Listar ou adicionar professores
 3 - Listar ou adicionar aulas''')
+    
     try:
         opcao = int(input('Opção: '))
-        if 1 >= opcao <= 3:
-            match opcao:
-                case 1:
-                    listOrAddAluno()
-                case 2:
-                    listOrAddProfessor()
-                case 3:
-                    listOrAddAulas()
+        if opcao == 1:
+            listOrAddAluno()
+        elif opcao == 2:
+            listOrAddProfessor()    
+        elif opcao == 3:
+            listOrAddAulas()
         else:
             print('Opção inválida, tente novamente.\n')
             os.system('cls')        
@@ -31,7 +35,7 @@ def menu():
         main()
 
 def retorna():
-    input("Digite uma tecla para voltar ao menus\n")
+    input("\nDigite uma tecla para voltar ao menus\n")
     main()
 
 def listOrAddAluno():
@@ -42,14 +46,11 @@ def listOrAddAluno():
     
     try:
         opcao = int(input('Opção: '))
-        if 1 >= opcao <= 2:
-            match opcao:
-                case 1:
-                    print(alunos) if len(alunos) > 0 else print("Não há alunos matriculados")
-                    retorna()
-
-                case 2:
-                    listOrAddProfessor()
+        if opcao == 1:
+            listar(alunos)
+        elif opcao == 2:
+            nome = input('Digite o nome do aluno:\n')
+            adicionar(alunos, nome)
         else:
             print('Opção inválida, tente novamente.\n')
             os.system('cls')        
@@ -66,18 +67,54 @@ def listOrAddProfessor():
 1 - Listar
 2 - Adicionar\n''')
 
+    try:
+        opcao = int(input('Opção: '))
+        if opcao == 1:
+            listar(professores)
+        elif opcao == 2:
+            nome = input('Digite o nome do professor:\n')
+            adicionar(professores, nome)
+        else:
+            print('Opção inválida, tente novamente.\n')
+            os.system('cls')        
+            listOrAddAluno()
+      
+    except:
+        print('Opção inválida, tente novamente.\n')
+        os.system('cls')        
+        listOrAddAluno()
+
 def listOrAddAulas():
     os.system('cls') 
     print('''Listar ou adicionar aulas
 1 - Listar
 2 - Adicionar\n''')
+    
+    try:
+        opcao = int(input('Opção: '))
+        if opcao == 1:
+            listar(aulas)
+        elif opcao == 2:
+            aula = input('Digite a aula que quer adicionar:\n')
+            adicionar(aulas, aula)
+        else:
+            print('Opção inválida, tente novamente.\n')
+            os.system('cls')        
+            listOrAddAluno()
+      
+    except:
+        print('Opção inválida, tente novamente.\n')
+        os.system('cls')        
+        listOrAddAluno()
 
+def listar(lista):
+    [print(f"{indice+1} - {valor}") for indice, valor in enumerate(lista)] if len(lista) > 0 else print("Lista vazia!")
+    
+    retorna()
 
-
-def main():
-    os.system('cls')
-    print('Boas vindas ao sistema de gestão da Escola de Música Sustenido\n\n')
-    menu()
+def adicionar(lista, item):
+    lista.append(item)
+    retorna()
 
 if __name__ == '__main__':
     main()
@@ -85,7 +122,7 @@ if __name__ == '__main__':
 
 
 
-class escola:
+"""class escola:
     def __init__(self, nome, funcao, diasDeAula, mensalidade, contrato, aula, salario):
         self.nome = nome
         self.funcao = funcao
@@ -94,6 +131,7 @@ class escola:
         self.contrato = contrato
         self.aula = aula
         self.salario = salario
+
 
 class aluno(escola):
     def __init__(self, nome, diasDeAula, mensalidade, contrato, aula):
@@ -104,3 +142,4 @@ class professor(escola):
     def __init__(self, nome, funcao, diasDeAula, contrato, salario):
         super().__init__(nome, funcao, diasDeAula, contrato, salario)
         self.funcao = professor
+"""
