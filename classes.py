@@ -18,17 +18,15 @@ class Escola:
             print(f"'{aluno.nome}' já consta no nosso Banco de Dados. Não foi adicionado novamente.")
 
     def adicionar_professor(self, professor):
-        nomes_professores = [p.nome for p in self._professores]
-
-        if professor.nome not in nomes_professores:
-            aulas_invalidas = set(professor.aula) - set(self._aulas)
-            if not aulas_invalidas:
+        nomes_professores = [p._nome for p in self._professores]
+        if professor._nome not in nomes_professores:
+            if professor._aula in self._aulas:
                 self._professores.append(professor)
                 print("Professor adicionado com sucesso!")
             else:
-                print(f"Aula(s) não consta(m) no banco de dados: {', '.join(aulas_invalidas)}")
+                print ("Aula não consta no banco de dados!")
         else:
-            print(f"O professor '{professor.nome}' já consta no nosso Banco de Dados. Não foi adicionado novamente.")
+            print(f"'{professor._nome}' já consta no nosso Banco de Dados. Não foi adicionado novamente.")
 
     def adicionar_aula(self, aula):
         if aula not in self._aulas:
