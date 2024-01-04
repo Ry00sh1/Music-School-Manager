@@ -137,9 +137,9 @@ def adicionar_aluno():
     retorna()
 
 def adicionar_professor():
-    nome = input('Digite o nome do aluno:\n')
-    aula = input('Digite a aula que esse aluno frequenta:\n')
-    salario = float(input('Digite o valor do salário:\nR$ '))
+    nome = input('Digite o nome do professor:\n')
+    aula = input('Digite a aula que esse professor leciona:\n')
+    salario = float(input('Digite o valor do salário desse professor:\nR$ '))
     professor = (Professor(nome, aula, salario))
     escola.adicionar_professor(professor)
     retorna()
