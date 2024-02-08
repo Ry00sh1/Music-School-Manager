@@ -2,8 +2,8 @@ from classes import Escola, Aluno, Professor
 import os
 
 # Criando uma instância da classe Escola
-escola = Escola()
-escola.adicionar_aula('Guitarra')
+lacord = Escola()
+lacord.adicionar_aula('Guitarra')
 
 def main():
     ''' Essa função é responsável por limpar a tela e imprimir uma mensagem de boas vindas
@@ -66,7 +66,7 @@ def menu_aluno():
     try:
         opcao = int(input('Opção: '))
         if opcao == 1:
-            escola.mostrar_alunos()
+            lacord.mostrar_alunos()
             retorna()
         elif opcao == 2:
             adicionar_aluno()
@@ -91,7 +91,7 @@ def menu_professor():
     try:
         opcao = int(input('Opção: '))
         if opcao == 1:
-            escola.mostrar_professores()
+            lacord.mostrar_professores()
             retorna()
         elif opcao == 2:
             adicionar_professor()
@@ -114,7 +114,7 @@ def menu_aula():
     try:
         opcao = int(input('Opção: '))
         if opcao == 1:
-            escola.mostrar_aulas()
+            lacord.mostrar_aulas()
             retorna()
         elif opcao == 2:
             adicionar_aula()
@@ -133,7 +133,7 @@ def adicionar_aluno():
     aula = input('Digite a aula que esse aluno frequenta:\n')
     mensalidade = float(input('Digite o valor da mensalidade:\nR$ '))
     aluno = (Aluno(nome, aula, mensalidade))
-    escola.adicionar_aluno(aluno)
+    lacord.adicionar_aluno(aluno)
     retorna()
 
 def adicionar_professor():
@@ -141,17 +141,17 @@ def adicionar_professor():
     aula = input('Digite a aula que esse professor leciona:\n')
     salario = float(input('Digite o valor do salário desse professor:\nR$ '))
     professor = (Professor(nome, aula, salario))
-    escola.adicionar_professor(professor)
+    lacord.adicionar_professor(professor)
     retorna()
 
 def adicionar_aula():
     aula = input("Digite a aula a ser adicionada:\n")
-    escola.adicionar_aula(aula)
+    lacord.adicionar_aula(aula)
     retorna()
 
 def matricula_aluno():
     aluno = input("Digite o nome do aluno que terá o status da matrícula alterado:\n")
-    escola.matricula_aluno(aluno)
+    lacord.matricula_aluno(aluno)
     retorna()
 
 if __name__ == '__main__':

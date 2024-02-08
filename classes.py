@@ -69,8 +69,8 @@ class Escola:
 
     def matricula_aluno(self, nome):
         for aluno in self._alunos:
-            if aluno.nome == nome:
-                aluno.status_da_matricula = not aluno.status_da_matricula
+            if aluno._nome == nome:
+                aluno._status_da_matricula = not aluno._status_da_matricula
                 print("Situação da matrícula alterada com sucesso!")
                 break
         else:
@@ -101,7 +101,10 @@ class Aluno(Pessoa):
 
     @property
     def status_da_matricula(self):
-        return self._status_da_matricula
+        if self._status_da_matricula:
+            return 'Ativada'
+        else:
+            return 'Desativada'
 
     @Pessoa.aula.setter
     def aula(self, nova_aula):
@@ -138,9 +141,3 @@ class Professor(Pessoa):
 
 
 
-escola = Escola()
-escola.adicionar_aula('Guitarra')
-escola.adicionar_aula('Canto')
-professor = Professor('Augusto',['Guitarra','Canto'],3000)
-escola.adicionar_professor(professor)
-escola.mostrar_professores()
