@@ -2,8 +2,10 @@ from classes import Escola, Aluno, Professor
 import os
 
 # Criando uma instância da classe Escola
-lacord = Escola()
-lacord.adicionar_aula('Guitarra')
+sustenido = Escola()
+sustenido.adicionar_aula('Guitarra')
+aluno = (Aluno('Pedro', 'Guitarra', 120))
+sustenido.adicionar_aluno(aluno)
 
 def main():
     ''' Essa função é responsável por limpar a tela e imprimir uma mensagem de boas vindas
@@ -42,7 +44,7 @@ def menu():
         main()
 
 def retorna():
-    input("\nDigite uma tecla para voltar ao menu\n")
+    input("\nAperte uma tecla para voltar ao menu\n")
     main()
 
 def menu_aluno():
@@ -61,17 +63,20 @@ def menu_aluno():
     print('''Gestão de alunos
 1 - Listar
 2 - Adicionar
-3 - Alterar a situação da matrícula\n''')
+3 - Alterar informações
+4 - Remover aluno\n''')
     
     try:
         opcao = int(input('Opção: '))
         if opcao == 1:
-            lacord.mostrar_alunos()
+            sustenido.listar_alunos()
             retorna()
         elif opcao == 2:
-            adicionar_aluno()
+            adiciona_aluno()
         elif opcao == 3:
-            matricula_aluno()
+            altera_aluno()
+        elif opcao == 4:
+            remove_aluno()
         else:
             print('Opção inválida, tente novamente.\n')
             os.system('cls')        
@@ -90,20 +95,25 @@ def menu_professor():
 
     try:
         opcao = int(input('Opção: '))
-        if opcao == 1:
-            lacord.mostrar_professores()
-            retorna()
-        elif opcao == 2:
-            adicionar_professor()
-        else:
-            print('Opção inválida, tente novamente.\n')
-            os.system('cls')        
-            menu_professor()
-      
+        while opcao != 1 or opcao != 2:
+            if opcao == 1:
+                sustenido.mostrar_professores()
+                retorna()
+            elif opcao == 2:
+                adiciona_professor()
+            else:
+                menu_professor()
+                print('Opção inválida, tente novamente.\n')
+                    
+                
+        
     except:
-        print('Opção inválida, tente novamente.\n')
-        os.system('cls')        
         menu_professor()
+        print('Opção inválida, tente novamente.\n')
+            
+        
+    
+        
 
 def menu_aula():
     os.system('cls') 
@@ -114,45 +124,67 @@ def menu_aula():
     try:
         opcao = int(input('Opção: '))
         if opcao == 1:
-            lacord.mostrar_aulas()
+            sustenido.mostrar_aulas()
             retorna()
         elif opcao == 2:
-            adicionar_aula()
+            adiciona_aula()
         else:
             print('Opção inválida, tente novamente.\n')
-            os.system('cls')        
+                
             menu_aula()
       
     except:
         print('Opção inválida, tente novamente.\n')
-        os.system('cls')        
+            
         menu_aula()
 
-def adicionar_aluno():
+def adiciona_aluno():
     nome = input('Digite o nome do aluno:\n')
     aula = input('Digite a aula que esse aluno frequenta:\n')
     mensalidade = float(input('Digite o valor da mensalidade:\nR$ '))
     aluno = (Aluno(nome, aula, mensalidade))
-    lacord.adicionar_aluno(aluno)
+    sustenido.adicionar_aluno(aluno)
     retorna()
 
-def adicionar_professor():
+def remove_aluno():
+    aluno = input("Digite o nome do aluno que será removido do Banco de Dados:\n")
+    sustenido.excluir_aluno(aluno)
+    retorna()
+
+def adiciona_professor():
     nome = input('Digite o nome do professor:\n')
     aula = input('Digite a aula que esse professor leciona:\n')
     salario = float(input('Digite o valor do salário desse professor:\nR$ '))
     professor = (Professor(nome, aula, salario))
-    lacord.adicionar_professor(professor)
+    sustenido.adicionar_professor(professor)
     retorna()
 
-def adicionar_aula():
+def adiciona_aula():
     aula = input("Digite a aula a ser adicionada:\n")
-    lacord.adicionar_aula(aula)
+    sustenido.adicionar_aula(aula)
     retorna()
 
-def matricula_aluno():
-    aluno = input("Digite o nome do aluno que terá o status da matrícula alterado:\n")
-    lacord.matricula_aluno(aluno)
-    retorna()
+def altera_aluno():
+    
+    print('''Alterar:
+1 - Nome
+2 - Mensalidade
+3 - Matrícula
+4 - Aula\n''')
+    
+    opcao = int(input('Opção: '))
+    try:
+        
+        print(sustenido.functions_aluno(opcao))
+        retorna()
+      
+    except Exception as e:
+        
+        os.system('cls')    
+        print(f'Erro: {e}\nOpção inválida, tente novamente.\n')     
+        altera_aluno()
+
+    
 
 if __name__ == '__main__':
     main()
